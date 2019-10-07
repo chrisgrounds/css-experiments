@@ -1,0 +1,52 @@
+body {
+  margin: 10%;
+}
+
+.red-bg {
+  background-color: rgb(219, 68, 68);
+}
+
+/* Grid */
+
+.autogrid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+}
+
+/* Spinner css */
+
+.spinny {
+  width: 100px;
+  height: 100px;
+  position: relative;
+
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(0, 0, 0, .2), 0 0 2px rgba(0, 0, 0, .1);
+}
+
+.arm {
+  position: absolute;
+  height: 50px;
+  right: 48.75%;
+  width: 2px;
+
+  animation: animateArm 2s infinite linear;
+  transform-origin: 50% 100%;
+}
+
+@keyframes animateArm {
+  0% { 
+    transform: rotateZ(0deg);
+    background-color: red;
+  }
+
+  50% {
+    background-color: orange;
+  }
+
+  100% { 
+    transform: rotateZ(360deg);
+    background-color: red;
+  }
+}
