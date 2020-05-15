@@ -1,0 +1,111 @@
+<link rel="stylesheet" href="https://chrisgrounds--css.s3.eu-west-2.amazonaws.com/animate-hover.css" type="text/css">
+
+<div class="information-container">
+  <div>
+    <h1 class="information-container__title">hover animations for borders</h1>
+    <h3>usage</h3>
+      <p>Include the css (https://chrisgrounds--css.s3.eu-west-2.amazonaws.com/animate-hover.css) in your html and then set the following css variables:</p>
+      <pre>
+  --border-animate-background-color: none;
+  --border-animate-border-color-on-hover: #60daaa;
+  --border-animate-text-color-before-hover: #f45e61;
+  --border-animate-text-color-on-hover: #60daaa;
+  --border-animate-transition-duration-0-25: 0.25s;
+  --border-animate-transition-delay: 0.25s;
+      </pre>
+      <p>You can customise the buttons through these variables.</p>
+      <p>To get the styles to work you need to include two classes on your HTML element:</p>
+      <pre>
+&lt;div class="element__animate element__animate--XXX"&gt;CONTENT&lt;/div&gt;
+      </pre>
+      <p>where XXX is the name of the specific animation you want. The options are:</p>
+      <ul>
+        <li>round-trip</li>
+        <li>rejoin</li>
+        <li>tie-fighter</li>
+        <li>on-the-top-ltr</li>
+        <li>on-the-top-rtl</li>
+        <li>on-the-bottom-ltr</li>
+        <li>on-the-bottom-rtl</li>
+        <li>on-the-left</li>
+        <li>on-the-right</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="examples-container">
+  <a class="element__animate element__animate--round-trip" href="">
+      Round trip
+  </a>
+
+  <a class="element__animate element__animate--rejoin" href="">
+      Rejoin
+  </a>
+
+  <a class="element__animate element__animate--tie-fighter" href="">
+      Tie fighter
+  </a>
+
+  <a class="element__animate element__animate--on-the-top-ltr" href="">
+      On the top ltr
+  </a>
+
+  <a class="element__animate element__animate--on-the-top-rtl" href="">
+      On the top rtl
+  </a>
+
+  <a class="element__animate element__animate--on-the-bottom-ltr" href="">
+      On the bottom ltr
+  </a>
+
+  <a class="element__animate element__animate--on-the-bottom-rtl" href="">
+      On the bottom rtl
+  </a>
+  <a class="element__animate element__animate--on-the-right" href="">
+      On the right
+  </a>
+
+  <a class="element__animate element__animate--on-the-left" href="">
+      On the left
+  </a>
+</div>
+
+<style media="screen">
+:root {
+  --border-animate-background-color: none;
+  --border-animate-border-color-on-hover: #60daaa;
+  --border-animate-text-color-before-hover: #f45e61;
+  --border-animate-text-color-on-hover: #60daaa;
+  --border-animate-transition-duration-0-25: 0.25s;
+  --border-animate-transition-delay: 0.25s;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  display: block;
+  margin: 0px;
+  font-size: 16px;
+}
+
+.information-container {
+  background-color: rgb(1, 31, 140);
+  color: white;
+  padding: 2rem;
+}
+
+.information-container__title {
+  text-align: center;
+}
+
+.examples-container {
+  width: 100%;
+  display: grid;
+  margin: 2rem;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fill, 200px);
+}
+</style>
