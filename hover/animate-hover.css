@@ -1,0 +1,355 @@
+/*
+  Basically its a pseudo element that starts with no width and height. We then expand the pesudo elements (::before = top-left, after = bottom-right) to have width and height and then give them a border top/right, and border bottom/left. Because the width and height have transitions it makes it look like the border is growing. Because we use the transition-delay property we can control the order in which things happen.
+*/
+
+/* Provide your own root variables if you want to customise this
+:root {
+  --border-animate-background-color: none;
+  --border-animate-border-color-on-hover: #60daaa;
+  --border-animate-text-color-before-hover: #f45e61;
+  --border-animate-text-color-on-hover: #60daaa;
+  --border-animate-transition-duration-0-25: 0.25s;
+  --border-animate-transition-delay: 0.25s;
+}
+*/
+
+.element__animate {
+  background: var(--border-animate-background-color);
+  border: 0;
+  box-sizing: border-box;
+  margin: 1em;
+  padding: 1em 2em;
+
+  color: var(--border-animate-text-color-before-hover);
+  font-size: inherit;
+  font-weight: 700;
+
+  /* Required, since we're setting absolute on pseudo-elements */
+  position: relative;
+  vertical-align: middle;
+  box-shadow: 0 0 12px rgba(0, 0, 0, .2), 0 0 2px rgba(0, 0, 0, .1)
+}
+
+.element__animate::before, .element__animate::after {
+  box-sizing: inherit;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/* Round trip */
+
+.element__animate--round-trip {
+  transition: color var(--border-animate-transition-duration-0-25);
+}
+
+.element__animate--round-trip::before, .element__animate--round-trip::after {
+  /* Set border to invisible, so we don't see a 4px border on a 0x0 element before the transition starts */
+  border: 2px solid transparent;
+  width: 0;
+  height: 0;
+}
+
+/* This covers the top & right borders (expands right, then down) */
+.element__animate--round-trip::before {
+  top: 0;
+  left: 0;
+}
+
+/* And this the bottom & left borders (expands left, then up) */
+.element__animate--round-trip::after {
+  bottom: 0;
+  right: 0;
+}
+
+.element__animate--round-trip:hover {
+  color: var(--border-animate-text-color-on-hover);
+}
+
+/* Hover styles */
+.element__animate--round-trip:hover::before, .element__animate--round-trip:hover::after {
+  width: 100%;
+  height: 100%;
+}
+
+.element__animate--round-trip:hover::before {
+  border-top-color: var(--border-animate-border-color-on-hover); /* Make borders visible */
+  border-right-color: var(--border-animate-border-color-on-hover);
+  transition:
+    width var(--border-animate-transition-duration-0-25) ease-out, /* Width expands first */
+    height var(--border-animate-transition-duration-0-25) ease-out var(--border-animate-transition-delay); /* And then height */
+}
+
+.element__animate--round-trip:hover::after {
+  border-bottom-color: var(--border-animate-border-color-on-hover); /* Make borders visible */
+  border-left-color: var(--border-animate-border-color-on-hover);
+  transition:
+    border-color 0s ease-out 0.5s, /* Wait for ::before to finish before showing border */
+    width var(--border-animate-transition-duration-0-25) ease-out 0.5s, /* And then exanding width */
+    height var(--border-animate-transition-duration-0-25) ease-out 0.75s; /* And finally height */
+}
+
+/* Rejoin */
+
+.element__animate--rejoin {
+  transition: color var(--border-animate-transition-duration-0-25);
+}
+
+.element__animate--rejoin::before, .element__animate--rejoin::after {
+  /* Set border to invisible, so we don't see a 4px border on a 0x0 element before the transition starts */
+  border: 2px solid transparent;
+  width: 0;
+  height: 0;
+}
+
+.element__animate--rejoin::before {
+  top: 0;
+  left: 0;
+}
+
+.element__animate--rejoin::after {
+  top: 0;
+  left: 0;
+}
+
+.element__animate--rejoin:hover {
+  color: var(--border-animate-text-color-on-hover);
+}
+
+.element__animate--rejoin:hover::before, .element__animate--rejoin:hover::after {
+  width: 100%;
+  height: 100%;
+}
+
+.element__animate--rejoin:hover::before {
+  border-top-color: var(--border-animate-border-color-on-hover); /* Make borders visible */
+  border-right-color: var(--border-animate-border-color-on-hover);
+  transition:
+    width var(--border-animate-transition-duration-0-25) ease-out, /* Width expands first */
+    height var(--border-animate-transition-duration-0-25) ease-out var(--border-animate-transition-delay); /* And then height */
+}
+
+.element__animate--rejoin:hover::after {
+  border-bottom-color: var(--border-animate-border-color-on-hover); /* Make borders visible */
+  border-left-color: var(--border-animate-border-color-on-hover);
+  transition:
+    width var(--border-animate-transition-duration-0-25) ease-out var(--border-animate-transition-delay), /* And then exanding width */
+    height var(--border-animate-transition-duration-0-25) ease-out; /* Height first */
+}
+
+/* Tie fighter */
+
+.element__animate--tie-fighter {
+  transition: color var(--border-animate-transition-duration-0-25);
+}
+
+.element__animate--tie-fighter::before, .element__animate--tie-fighter::after {
+  /* Set border to invisible, so we don't see a 4px border on a 0x0 element before the transition starts */
+  border: 2px solid transparent;
+  width: 0;
+  height: 0;
+}
+
+.element__animate--tie-fighter::before {
+  top: 0;
+  left: 0;
+}
+
+.element__animate--tie-fighter::after {
+  bottom: 0;
+  right: 0;
+}
+
+.element__animate--tie-fighter:hover {
+  color: var(--border-animate-text-color-on-hover);
+}
+
+.element__animate--tie-fighter:hover::before, .element__animate--tie-fighter:hover::after {
+  width: 100%;
+  height: 100%;
+}
+
+.element__animate--tie-fighter:hover::before {
+  border-top-color: var(--border-animate-border-color-on-hover); /* Make borders visible */
+  border-right-color: var(--border-animate-border-color-on-hover);
+  transition:
+    width var(--border-animate-transition-duration-0-25) ease-out, /* Width expands first */
+    height var(--border-animate-transition-duration-0-25) ease-out var(--border-animate-transition-delay); /* And then height */
+}
+
+.element__animate--tie-fighter:hover::after {
+  border-bottom-color: var(--border-animate-border-color-on-hover); /* Make borders visible */
+  border-left-color: var(--border-animate-border-color-on-hover);
+  transition:
+    width var(--border-animate-transition-duration-0-25) ease-out, /* Width expands first */
+    height var(--border-animate-transition-duration-0-25) ease-out var(--border-animate-transition-delay); /* And then height */
+}
+
+
+/* On the bottom */
+
+.element__animate--on-the-bottom-ltr {
+  transition: color var(--border-animate-transition-duration-0-25);
+}
+
+.element__animate--on-the-bottom-ltr::before {
+  /* Set border to invisible, so we don't see a 4px border on a 0x0 element before the transition starts */
+  border: 2px solid transparent;
+  width: 0;
+  height: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.element__animate--on-the-bottom-ltr:hover {
+  color: var(--border-animate-text-color-on-hover);
+}
+
+.element__animate--on-the-bottom-ltr:hover::before {
+  width: 100%;
+  height: 100%;
+  border-bottom-color: var(--border-animate-border-color-on-hover); /* Make borders visible */
+  transition:
+    width var(--border-animate-transition-duration-0-25) ease-out, /* Width expands first */
+    height var(--border-animate-transition-duration-0-25) ease-out var(--border-animate-transition-delay); /* And then height */
+}
+
+
+.element__animate--on-the-bottom-rtl {
+  transition: color var(--border-animate-transition-duration-0-25);
+}
+
+.element__animate--on-the-bottom-rtl::before {
+  /* Set border to invisible, so we don't see a 4px border on a 0x0 element before the transition starts */
+  border: 2px solid transparent;
+  width: 0;
+  height: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.element__animate--on-the-bottom-rtl:hover {
+  color: var(--border-animate-text-color-on-hover);
+}
+
+.element__animate--on-the-bottom-rtl:hover::before {
+  width: 100%;
+  height: 100%;
+  border-bottom-color: var(--border-animate-border-color-on-hover); /* Make borders visible */
+  transition:
+    width var(--border-animate-transition-duration-0-25) ease-out, /* Width expands first */
+    height var(--border-animate-transition-duration-0-25) ease-out var(--border-animate-transition-delay); /* And then height */
+}
+
+
+/* On the top */
+
+.element__animate--on-the-top-ltr {
+  transition: color var(--border-animate-transition-duration-0-25);
+}
+
+.element__animate--on-the-top-ltr::before {
+  /* Set border to invisible, so we don't see a 4px border on a 0x0 element before the transition starts */
+  border: 2px solid transparent;
+  width: 0;
+  height: 0;
+  top: 0;
+  left: 0;
+}
+
+.element__animate--on-the-top-ltr:hover {
+  color: var(--border-animate-text-color-on-hover);
+}
+
+.element__animate--on-the-top-ltr:hover::before {
+  width: 100%;
+  height: 100%;
+  border-top-color: var(--border-animate-border-color-on-hover); /* Make borders visible */
+  transition:
+    width var(--border-animate-transition-duration-0-25) ease-out, /* Width expands first */
+    height var(--border-animate-transition-duration-0-25) ease-out var(--border-animate-transition-delay); /* And then height */
+}
+
+
+.element__animate--on-the-top-rtl {
+  transition: color var(--border-animate-transition-duration-0-25);
+}
+
+.element__animate--on-the-top-rtl::before {
+  /* Set border to invisible, so we don't see a 4px border on a 0x0 element before the transition starts */
+  border: 2px solid transparent;
+  width: 0;
+  height: 0;
+  top: 0;
+  right: 0;
+}
+
+.element__animate--on-the-top-rtl:hover {
+  color: var(--border-animate-text-color-on-hover);
+}
+
+.element__animate--on-the-top-rtl:hover::before {
+  width: 100%;
+  height: 100%;
+  border-top-color: var(--border-animate-border-color-on-hover); /* Make borders visible */
+  transition:
+    width var(--border-animate-transition-duration-0-25) ease-out, /* Width expands first */
+    height var(--border-animate-transition-duration-0-25) ease-out var(--border-animate-transition-delay); /* And then height */
+}
+
+/* On the left */
+
+.element__animate--on-the-left {
+  transition: color var(--border-animate-transition-duration-0-25);
+}
+
+.element__animate--on-the-left::before {
+  /* Set border to invisible, so we don't see a 4px border on a 0x0 element before the transition starts */
+  border: 2px solid transparent;
+  width: 0;
+  height: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.element__animate--on-the-left:hover {
+  color: var(--border-animate-text-color-on-hover);
+}
+
+.element__animate--on-the-left:hover::before {
+  width: 100%;
+  height: 100%;
+  border-left-color: var(--border-animate-border-color-on-hover); /* Make borders visible */
+  transition:
+    width var(--border-animate-transition-duration-0-25) ease-out, /* Width expands first */
+    height var(--border-animate-transition-duration-0-25) ease-out var(--border-animate-transition-delay); /* And then height */
+}
+
+/* On the right */
+
+.element__animate--on-the-right {
+  transition: color var(--border-animate-transition-duration-0-25);
+}
+
+.element__animate--on-the-right::before {
+  /* Set border to invisible, so we don't see a 4px border on a 0x0 element before the transition starts */
+  border: 2px solid transparent;
+  width: 0;
+  height: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.element__animate--on-the-right:hover {
+  color: var(--border-animate-text-color-on-hover);
+}
+
+.element__animate--on-the-right:hover::before {
+  width: 100%;
+  height: 100%;
+  border-right-color: var(--border-animate-border-color-on-hover); /* Make borders visible */
+  transition:
+    width var(--border-animate-transition-duration-0-25) ease-out, /* Width expands first */
+    height var(--border-animate-transition-duration-0-25) ease-out var(--border-animate-transition-delay); /* And then height */
+}
